@@ -10,7 +10,7 @@ Problems are organized by topic with clean and well-explained solutions.
 - Stack
 - Queue
 - Trees
-- Graphs
+- Hash Map
 
 ## Purpose
 - Improve problem-solving skills
