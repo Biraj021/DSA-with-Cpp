@@ -24,8 +24,6 @@ class Solution {
 public:
     vector<int> findErrorNums(vector<int>& nums) {
         int duplicate = -1, missing = -1;
-        
-        // Step 1: mark visited numbers as negative
         for (int i = 0; i < nums.size(); i++) {
             int idx = abs(nums[i]) - 1;
             if (nums[idx] < 0)
@@ -33,13 +31,10 @@ public:
             else
                 nums[idx] *= -1;
         }
-        
-        // Step 2: find the missing number (the positive index)
         for (int i = 0; i < nums.size(); i++) {
             if (nums[i] > 0)
                 missing = i + 1;
         }
-        
         return {duplicate, missing};
     }
 };
