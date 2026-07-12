@@ -37,7 +37,6 @@
 class Solution {
 public:
     TreeNode* first = NULL;
-
     void markparent(TreeNode* root, unordered_map<TreeNode*, TreeNode*>& parent){
         if(root == NULL) return;
         if(root->left) parent[root->left] = root;
@@ -45,7 +44,6 @@ public:
         markparent(root->left, parent);
         markparent(root->right, parent);
     }
-
     void find(TreeNode* root, int start){
         if(root == NULL) return;
         if(root->val == start){
@@ -55,51 +53,35 @@ public:
         find(root->left, start);
         find(root->right, start);
     }
-
     int amountOfTime(TreeNode* root, int start) {
         find(root, start);
-
-        if(first == NULL) return 0; // safety
-
+        if(first == NULL) return 0; 
         unordered_map<TreeNode*, TreeNode*> parent;
-        markparent(root, parent); // 🔥 added
-
+        markparent(root, parent); 
         unordered_set<TreeNode*> s;
         s.insert(first);
-
         queue<pair<TreeNode*, int>> q;
         q.push({first, 0});
-
         int maxlevel = 0;
-
         while(!q.empty()){
             auto p = q.front();
             q.pop();
-
             TreeNode* temp = p.first;
             int level = p.second;
-
             maxlevel = max(maxlevel, level);
-
-            // left
             if(temp->left && s.find(temp->left) == s.end()){
                 q.push({temp->left, level + 1});
                 s.insert(temp->left);
             }
-
-            // right 🔥 added
             if(temp->right && s.find(temp->right) == s.end()){
                 q.push({temp->right, level + 1});
                 s.insert(temp->right);
             }
-
-            // parent 🔥 added
             if(parent[temp] && s.find(parent[temp]) == s.end()){
                 q.push({parent[temp], level + 1});
                 s.insert(parent[temp]);
             }
         }
-
         return maxlevel;
     }
 };
