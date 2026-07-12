@@ -27,23 +27,20 @@ class Solution {
 public:
     int magicalString(int n) {
         if (n == 0) return 0;
-        if (n <= 3) return 1; // "122" has 1 one
-
+        if (n <= 3) return 1; 
         vector<int> s = {1, 2, 2};
-        int count = 1; // count of 1's
-        int i = 2;     // pointer to read
+        int count = 1; 
+        int i = 2;     
         int nextNum = 1;
-
         while (s.size() < n) {
             int times = s[i];
             for (int j = 0; j < times && s.size() < n; j++) {
                 s.push_back(nextNum);
                 if (nextNum == 1) count++;
             }
-            nextNum = 3 - nextNum; // alternate 1 <-> 2
+            nextNum = 3 - nextNum; 
             i++;
         }
-
         return count;
     }
 };
