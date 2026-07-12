@@ -26,28 +26,19 @@
 class Solution {
 public:
     int characterReplacement(string s, int k) {
-        vector<int> count(26, 0);   // frequency of A-Z
+        vector<int> count(26, 0);   
         int left = 0;
-        int maxFreq = 0;           // highest frequency in current window
+        int maxFreq = 0;          
         int maxLength = 0;
-
         for(int right = 0; right < s.length(); right++) {
-            // increase frequency of current character
             count[s[right] - 'A']++;
-
-            // update max frequency
             maxFreq = max(maxFreq, count[s[right] - 'A']);
-
-            // if window invalid, shrink from left
             while((right - left + 1) - maxFreq > k) {
                 count[s[left] - 'A']--;
                 left++;
             }
-
-            // update maximum length
             maxLength = max(maxLength, right - left + 1);
         }
-
         return maxLength;
     }
 };
