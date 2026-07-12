@@ -24,17 +24,14 @@ class Solution {
 public:
     vector<int> dailyTemperatures(vector<int>& temperatures) {
         int n = temperatures.size();
-        vector<int> answer(n, 0);   // default 0
-        stack<int> st;              // stores indices
-
+        vector<int> answer(n, 0);   
+        stack<int> st;             
         for (int i = 0; i < n; i++) {
-            // Resolve all previous days that are colder than today
             while (!st.empty() && temperatures[i] > temperatures[st.top()]) {
                 int prevDay = st.top();
                 st.pop();
                 answer[prevDay] = i - prevDay;
             }
-            // Current day waits for a warmer future day
             st.push(i);
         }
         return answer;
