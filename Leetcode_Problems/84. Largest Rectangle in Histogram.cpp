@@ -25,32 +25,26 @@ class Solution {
 public:
     int largestRectangleArea(vector<int>& arr) {
         int n = arr.size();
-
-        // Next Smaller Index (NSI)
         vector<int> nsi(n);
-        stack<int> s;  // stack for NSI
+        stack<int> s;  
         for (int i = n - 1; i >= 0; i--) {
             while (!s.empty() && arr[s.top()] >= arr[i]) s.pop();
             if (s.empty())
-                nsi[i] = n;    // if no smaller to right
+                nsi[i] = n;   
             else
-                nsi[i] = s.top(); // next smaller index
+                nsi[i] = s.top();
             s.push(i);
         }
-
-        // Previous Smaller Index (PSI)
         vector<int> psi(n);
-        stack<int> t;  // stack for PSI
+        stack<int> t;  
         for (int i = 0; i < n; i++) {
             while (!t.empty() && arr[t.top()] >= arr[i]) t.pop();
             if (t.empty())
-                psi[i] = -1;   // if no smaller to left
+                psi[i] = -1;   
             else
-                psi[i] = t.top(); // previous smaller index
+                psi[i] = t.top(); 
             t.push(i);
         }
-
-        // Calculate max area
         int maxarea = 0;
         for (int i = 0; i < n; i++) {
             int height = arr[i];
@@ -58,7 +52,6 @@ public:
             int area = height * breadth;
             maxarea = max(maxarea, area);
         }
-
         return maxarea;
     }
 };
