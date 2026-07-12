@@ -54,18 +54,15 @@ public:
     vector<string> buildArray(vector<int>& target, int n) {
         vector<string> operations;
         int j = 0; 
-        
         for (int i = 1; i <= n && j < target.size(); i++) {
             operations.push_back("Push"); 
-            
             if (i == target[j]) {
                 j++;
-            } else {
-            
+            } 
+            else {
                 operations.push_back("Pop");
             }
         }
-        
         return operations;
     }
 };
