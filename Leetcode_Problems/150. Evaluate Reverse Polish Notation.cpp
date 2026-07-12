@@ -45,27 +45,21 @@ public:
         if(c == '+') return val1 + val2;
         else if(c == '-') return val1 - val2;
         else if(c == '*') return val1 * val2;
-        else return val1 / val2; // assume no division by zero
+        else return val1 / val2; 
     }
-
     int evalRPN(vector<string>& t) {
         stack<int> val;
-
         for(int i = 0; i < t.size(); i++) {
             string token = t[i];
-
-            // If token is an operator
             if(token == "+" || token == "-" || token == "*" || token == "/") {
                 int val2 = val.top(); val.pop();
                 int val1 = val.top(); val.pop();
                 val.push(kam(val1, val2, token[0]));
             } 
             else {
-                // It's a number, push to stack
                 val.push(stoi(token));
             }
         }
-
         return val.top();
     }
 
