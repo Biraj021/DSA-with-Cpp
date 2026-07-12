@@ -28,19 +28,14 @@ class Solution {
 public:
     vector<int> frequencySort(vector<int>& nums) {
         unordered_map<int,int> freq;
-
-        // Step 1: count frequency
         for(int x : nums){
             freq[x]++;
         }
-
-        // Step 2: sort
         sort(nums.begin(), nums.end(), [&](int a, int b){
             if(freq[a] == freq[b])
-                return a > b;        // bigger number first
-            return freq[a] < freq[b]; // smaller frequency first
+                return a > b;        
+            return freq[a] < freq[b];
         });
-
         return nums;
     }
 };
